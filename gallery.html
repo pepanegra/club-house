@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club House — Galería</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .gallery-hero { padding: 100px 48px 60px; position: relative; overflow: hidden; }
+    .glow-blue { width: 500px; height: 500px; top: -100px; right: -100px; }
+
+    .media-tabs {
+      display: flex; gap: 4px; margin-bottom: 40px;
+      background: var(--surface2); border-radius: 10px;
+      padding: 4px; width: fit-content;
+      border: 1px solid var(--border);
+    }
+    .tab-btn {
+      background: transparent; border: none;
+      padding: 10px 24px; border-radius: 8px;
+      font-size: 13px; color: var(--text-muted);
+      cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+    }
+    .tab-btn.active {
+      background: var(--blue-elec); color: #fff;
+    }
+
+    /* Fotos grid */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 220px;
+      gap: 16px;
+    }
+    .photo-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      position: relative; cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-item:hover { border-color: var(--border-hover); transform: scale(1.02); }
+    .photo-item.wide { grid-column: span 2; }
+    .photo-item.tall { grid-row: span 2; }
+
+    .photo-item img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .photo-placeholder {
+      font-size: 48px; opacity: 0.2;
+    }
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,20,0.85) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.2s;
+      display: flex; align-items: flex-end; padding: 16px;
+    }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-label { font-size: 13px; color: #fff; font-weight: 500; }
+
+    /* Videos grid */
+    .videos-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .video-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .video-card:hover { border-color: var(--border-hover); }
+    .video-thumb {
+      aspect-ratio: 16/9; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .video-thumb iframe {
+      width: 100%; height: 100%; border: none;
+    }
+    .video-placeholder {
+      font-size: 48px; opacity: 0.25;
+    }
+    .play-btn {
+      position: absolute;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(26,143,227,0.9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .play-btn:hover { transform: scale(1.1); }
+    .video-info { padding: 20px; }
+    .video-info h4 { font-size: 15px; color: #fff; margin-bottom: 6px; }
+    .video-info p  { font-size: 13px; color: var(--text-muted); }
+
+    /* Links section */
+    .links-grid { display: flex; flex-direction: column; gap: 14px; }
+    .link-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 24px;
+      display: flex; align-items: center; gap: 20px;
+      text-decoration: none; transition: border-color 0.2s;
+    }
+    .link-card:hover { border-color: var(--border-hover); }
+    .link-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--blue-dim); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .link-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+    .link-url   { font-size: 12px; color: var(--blue-elec); }
+    .link-arrow { margin-left: auto; color: var(--text-muted); font-size: 18px; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-icon">H</div>
+    <span class="logo-text">CLUB <span>HOUSE</span></span>
+  </a>
+  <ul>
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="about.html">Nosotros</a></li>
+    <li><a href="programs.html">Programas</a></li>
+    <li><a href="gallery.html">Galería</a></li>
+    <li><a href="team.html">Equipo</a></li>
+    <li><a href="contact.html" class="nav-cta">Únete</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="gallery-hero">
+    <div class="hero-grid"></div>
+    <div class="glow-blue"></div>
+
+    <div class="section" style="padding-top:0; padding-bottom:0;">
+      <span class="section-tag">// momentos</span>
+      <h1 class="page-title">Nuestra <span>galería</span></h1>
+      <div class="divider"></div>
+      <p class="page-sub">Cada taller, cada proyecto, cada logro queda aquí. La historia del Club House en imágenes, videos y recursos.</p>
+
+      <!-- Tabs -->
+      <div class="media-tabs">
+        <button class="tab-btn active" onclick="switchTab('photos', this)">📸 Fotos</button>
+        <button class="tab-btn" onclick="switchTab('videos', this)">🎬 Videos</button>
+        <button class="tab-btn" onclick="switchTab('links', this)">🔗 Recursos</button>
+      </div>
+
+      <!-- FOTOS -->
+      <div id="tab-photos">
+        <div class="photos-grid">
+          <div class="photo-item wide">
+            <div class="photo-placeholder">🖥️</div>
+            <div class="photo-overlay"><span class="photo-label">Hackathon 2024</span></div>
+          </div>
+          <div class="photo-item">
+            <div class="photo-placeholder">🤖</div>
+            <div class="photo-overlay"><span class="photo-label">Taller Robótica</span></div>
+          </div>
+          <div class="photo-item">
+            <div class="photo-placeholder">🎮</div>
+            <div class="photo-overlay"><span class="photo-label">Game Jam</span></div>
+          </div>
+          <div class="photo-item">
+            <div class="photo-placeholder">💡</div>
+            <div class="photo-overlay"><span class="photo-label">Demo Day</span></div>
+          </div>
+          <div class="photo-item">
+            <div class="photo-placeholder">🚀</div>
+            <div class="photo-overlay"><span class="photo-label">Graduación</span></div>
+          </div>
+          <div class="photo-item">
+            <div class="photo-placeholder">📱</div>
+            <div class="photo-overlay"><span class="photo-label">App Workshop</span></div>
+          </div>
+        </div>
+        <p style="text-align:center; margin-top:28px; font-size:13px; color:var(--text-muted);">Las fotos reales se cargarán desde el backend. Compártelas desde el panel de administrador.</p>
+      </div>
+
+      <!-- VIDEOS -->
+      <div id="tab-videos" class="hidden">
+        <div class="videos-grid">
+          <div class="video-card">
+            <div class="video-thumb">
+              <div class="video-placeholder">🎬</div>
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="video-info">
+              <h4>Hackathon 2024 — Highlights</h4>
+              <p>Resumen del hackathon anual del Club House con todos los proyectos finalistas.</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb">
+              <div class="video-placeholder">🤖</div>
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="video-info">
+              <h4>Intro a Robótica — Sesión 1</h4>
+              <p>Primera sesión del taller de robótica. Aprende a armar tu primer robot.</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb">
+              <div class="video-placeholder">💻</div>
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="video-info">
+              <h4>Crea tu primera app web</h4>
+              <p>Tutorial paso a paso para construir tu primer proyecto en HTML, CSS y JS.</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb">
+              <div class="video-placeholder">🎮</div>
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="video-info">
+              <h4>Game Jam 2024 — Demo</h4>
+              <p>Presentación de los videojuegos creados en 48 horas por nuestros estudiantes.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:28px; font-size:13px; color:var(--text-muted); text-align:center;">Los videos se agregan como links de YouTube desde el panel de administrador.</p>
+      </div>
+
+      <!-- LINKS / RECURSOS -->
+      <div id="tab-links" class="hidden">
+        <div class="links-grid">
+          <a href="#" class="link-card">
+            <div class="link-icon">📚</div>
+            <div>
+              <div class="link-title">Guía de inicio — Programación Web</div>
+              <div class="link-url">recursos.clubhouse.co/guia-web</div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#" class="link-card">
+            <div class="link-icon">🤖</div>
+            <div>
+              <div class="link-title">Kit de Robótica — Materiales necesarios</div>
+              <div class="link-url">recursos.clubhouse.co/kit-robotica</div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#" class="link-card">
+            <div class="link-icon">🎓</div>
+            <div>
+              <div class="link-title">Plataforma de cursos online</div>
+              <div class="link-url">aprende.clubhouse.co</div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#" class="link-card">
+            <div class="link-icon">💬</div>
+            <div>
+              <div class="link-title">Comunidad en Discord</div>
+              <div class="link-url">discord.gg/clubhouse-tech</div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#" class="link-card">
+            <div class="link-icon">📄</div>
+            <div>
+              <div class="link-title">Reglamento y políticas del Club</div>
+              <div class="link-url">clubhouse.co/docs/reglamento.pdf</div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+        </div>
+        <p style="margin-top:28px; font-size:13px; color:var(--text-muted); text-align:center;">Los recursos y links se administran desde el panel de administrador.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">CLUB <span>HOUSE</span></span>
+  <div class="footer-links">
+    <a href="../index.html">Inicio</a>
+    <a href="about.html">Nosotros</a>
+    <a href="programs.html">Programas</a>
+    <a href="gallery.html">Galería</a>
+    <a href="team.html">Equipo</a>
+    <a href="contact.html">Contacto</a>
+  </div>
+  <p>© 2026 Club House · Cali, Colombia</p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['photos','videos','links'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('hidden', t !== tab);
+  });
+}
+</script>
+</body>
+</html>

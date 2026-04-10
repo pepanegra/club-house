@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club House — Contacto</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .contact-hero { padding: 100px 48px 80px; position: relative; overflow: hidden; }
+    .glow-blue   { width: 500px; height: 500px; top: -100px; right: -50px; }
+    .glow-purple { width: 400px; height: 400px; bottom: -50px; left: -50px; }
+
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start;
+    }
+
+    /* Info lado izquierdo */
+    .contact-info h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 20px; color: #fff; margin-bottom: 16px;
+    }
+    .contact-info > p {
+      font-size: 15px; color: var(--text-muted);
+      margin-bottom: 36px; line-height: 1.7;
+    }
+    .info-item {
+      display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px;
+    }
+    .info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--blue-dim);
+      border: 1px solid rgba(26,143,227,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 17px;
+    }
+    .info-label { font-size: 11px; color: var(--blue-elec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px; }
+    .info-value { font-size: 14px; color: var(--text); }
+
+    /* Mapa placeholder */
+    .map-box {
+      margin-top: 28px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; color: rgba(126,200,227,0.3);
+    }
+
+    /* Formulario */
+    .form-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 40px;
+    }
+    .form-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px; color: #fff; margin-bottom: 6px;
+    }
+    .form-card > p {
+      font-size: 13px; color: var(--text-muted); margin-bottom: 28px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 11px;
+      color: var(--blue-light); text-transform: uppercase;
+      letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(10,10,20,0.6);
+      border: 1px solid rgba(75,45,143,0.45);
+      border-radius: 8px; padding: 12px 16px;
+      color: var(--text); font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-elec);
+      background: rgba(26,143,227,0.05);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(136,136,170,0.6); }
+    .form-group select option { background: #181830; }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--blue-elec); color: #fff;
+      padding: 14px; border-radius: 8px;
+      font-size: 15px; font-weight: 600; border: none;
+      cursor: pointer; letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .form-submit:hover { opacity: 0.88; }
+
+    .form-note { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+
+    /* Success state */
+    .success-msg {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .success-icon { font-size: 56px; margin-bottom: 16px; display: block; }
+    .success-msg h4 { font-family: 'Orbitron', monospace; font-size: 18px; color: #fff; margin-bottom: 10px; }
+    .success-msg p  { color: var(--text-muted); font-size: 14px; }
+
+    /* FAQ Section */
+    .faq-section {
+      background: var(--surface);
+      border-top: 1px solid rgba(75,45,143,0.2);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border); padding: 20px 0;
+    }
+    .faq-q {
+      font-size: 15px; font-weight: 500; color: #fff;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-q span { color: var(--blue-elec); font-size: 18px; transition: transform 0.2s; }
+    .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-top: 12px; display: none; }
+    .faq-item.open .faq-q span { transform: rotate(45deg); }
+    .faq-item.open .faq-a { display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-icon">H</div>
+    <span class="logo-text">CLUB <span>HOUSE</span></span>
+  </a>
+  <ul>
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="about.html">Nosotros</a></li>
+    <li><a href="programs.html">Programas</a></li>
+    <li><a href="gallery.html">Galería</a></li>
+    <li><a href="team.html">Equipo</a></li>
+    <li><a href="contact.html" class="nav-cta">Únete</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="contact-hero">
+    <div class="hero-grid"></div>
+    <div class="glow-blue"></div>
+    <div class="glow-purple"></div>
+
+    <div class="section" style="padding-top:0; padding-bottom:0;">
+      <span class="section-tag">// únete</span>
+      <h1 class="page-title">Empieza tu <span>aventura</span></h1>
+      <div class="divider"></div>
+
+      <div class="contact-layout">
+        <!-- INFO -->
+        <div class="contact-info" data-animate>
+          <h3>Hablemos</h3>
+          <p>¿Listo para aprender, crear e innovar? Inscríbete o contáctanos para más información sobre nuestros programas.</p>
+
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Ubicación</div>
+              <div class="info-value">Cali, Valle del Cauca, Colombia</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div>
+              <div class="info-label">Correo</div>
+              <div class="info-value">info@clubhouseh.co</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div>
+              <div class="info-label">WhatsApp</div>
+              <div class="info-value">+57 300 000 0000</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">⏰</div>
+            <div>
+              <div class="info-label">Horarios</div>
+              <div class="info-value">Lunes – Sábado · 8:00am – 6:00pm</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📸</div>
+            <div>
+              <div class="info-label">Instagram</div>
+              <div class="info-value">@clubhouse.tech</div>
+            </div>
+          </div>
+
+          <div class="map-box">🗺️</div>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-card" data-animate>
+          <h3>Formulario de inscripción</h3>
+          <p>Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
+
+          <div id="form-content">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" id="nombre" placeholder="Tu nombre">
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" id="apellido" placeholder="Tu apellido">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" id="email" placeholder="tucorreo@email.com">
+            </div>
+            <div class="form-group">
+              <label>Teléfono / WhatsApp</label>
+              <input type="tel" id="telefono" placeholder="+57 300 000 0000">
+            </div>
+            <div class="form-group">
+              <label>Edad</label>
+              <select id="edad">
+                <option value="">Selecciona tu rango de edad...</option>
+                <option>10 – 13 años</option>
+                <option>14 – 17 años</option>
+                <option>18 – 22 años</option>
+                <option>23 años o más</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Programa de interés</label>
+              <select id="programa">
+                <option value="">Selecciona un programa...</option>
+                <option>Programación Web</option>
+                <option>Robótica e IA</option>
+                <option>Diseño y Videojuegos</option>
+                <option>Desarrollo de Apps</option>
+                <option>Ciberseguridad</option>
+                <option>Ciencia de Datos</option>
+                <option>No sé, quiero asesoría</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>¿Cómo nos conociste?</label>
+              <select id="fuente">
+                <option value="">Selecciona una opción...</option>
+                <option>Instagram</option>
+                <option>WhatsApp / amigo</option>
+                <option>Google</option>
+                <option>Colegio / universidad</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mensaje (opcional)</label>
+              <textarea id="mensaje" placeholder="Cuéntanos sobre ti, tus intereses o tus preguntas..."></textarea>
+            </div>
+            <button class="form-submit" onclick="submitForm()">Enviar inscripción →</button>
+            <p class="form-note">Tu información es confidencial y no será compartida con terceros.</p>
+          </div>
+
+          <div class="success-msg" id="success-msg">
+            <span class="success-icon">🚀</span>
+            <h4>¡Inscripción enviada!</h4>
+            <p>Gracias por unirte al Club House. Te contactaremos en las próximas 24 horas al correo que registraste.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="section">
+      <span class="section-tag">// preguntas frecuentes</span>
+      <h2 class="page-title">¿Tienes <span>dudas?</span></h2>
+      <div class="divider"></div>
+
+      <div style="max-width: 720px;">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Qué edad se necesita para inscribirse?
+            <span>+</span>
+          </div>
+          <div class="faq-a">Nuestros programas están diseñados para jóvenes desde los 10 años en adelante. Algunos programas avanzados son ideales para mayores de 14 años. ¡Contáctanos y te ayudamos a elegir!</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Necesito experiencia previa en tecnología?
+            <span>+</span>
+          </div>
+          <div class="faq-a">¡Para nada! Tenemos programas para todos los niveles, desde cero hasta niveles más avanzados. Lo único que necesitas es curiosidad y ganas de aprender.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Los programas son virtuales o presenciales?
+            <span>+</span>
+          </div>
+          <div class="faq-a">Ofrecemos ambas modalidades. Tenemos talleres presenciales en Cali y opciones virtuales para estudiantes de otras ciudades. También hay algunos programas en modalidad híbrida.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Cuál es el costo de los programas?
+            <span>+</span>
+          </div>
+          <div class="faq-a">Los costos varían según el programa y la modalidad. Contáctanos directamente para recibir información actualizada sobre tarifas, becas y planes de pago disponibles.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Entregan certificados al finalizar?
+            <span>+</span>
+          </div>
+          <div class="faq-a">Sí. Al completar satisfactoriamente cada programa, los estudiantes reciben un certificado digital de participación avalado por Club House. También apoyamos a nuestros mejores estudiantes para obtener certificaciones internacionales.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">CLUB <span>HOUSE</span></span>
+  <div class="footer-links">
+    <a href="../index.html">Inicio</a>
+    <a href="about.html">Nosotros</a>
+    <a href="programs.html">Programas</a>
+    <a href="gallery.html">Galería</a>
+    <a href="team.html">Equipo</a>
+    <a href="contact.html">Contacto</a>
+  </div>
+  <p>© 2026 Club House · Cali, Colombia</p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+function submitForm() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  if (!nombre || !email) {
+    alert('Por favor ingresa al menos tu nombre y correo.');
+    return;
+  }
+  // Aquí se conectará con el backend Django
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('success-msg').style.display  = 'block';
+}
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>

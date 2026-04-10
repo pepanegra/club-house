@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club House — Inicio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      position: relative; overflow: hidden;
+    }
+    .glow-purple { width: 700px; height: 700px; top: -200px; right: -150px; }
+    .glow-blue   { width: 500px; height: 500px; bottom: -100px; left: 5%; }
+
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 68px; font-weight: 900;
+      line-height: 1.0; color: #fff;
+      letter-spacing: -2px; margin-bottom: 22px;
+    }
+    .hero h1 .accent { color: var(--blue-elec); }
+
+    .hero-slogan {
+      font-size: 19px; color: var(--blue-light);
+      font-weight: 300; font-style: italic;
+      margin-bottom: 14px; letter-spacing: 0.3px;
+    }
+    .hero p {
+      font-size: 16px; color: var(--text-muted);
+      margin-bottom: 40px; max-width: 520px; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Robot flotante */
+    .hero-robot {
+      position: absolute; right: 8%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 2; animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(-50%); }
+      50%      { transform: translateY(calc(-50% - 18px)); }
+    }
+
+    /* Tarjetas de features */
+    .features {
+      background: var(--surface);
+      border-top: 1px solid rgba(75,45,143,0.2);
+    }
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(26,143,227,0.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px;
+    }
+    .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">H</div>
+    <span class="logo-text">CLUB <span>HOUSE</span></span>
+  </a>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="pages/about.html">Nosotros</a></li>
+    <li><a href="pages/programs.html">Programas</a></li>
+    <li><a href="pages/gallery.html">Galería</a></li>
+    <li><a href="pages/team.html">Equipo</a></li>
+    <li><a href="pages/contact.html" class="nav-cta">Únete</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page">
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="glow-purple"></div>
+    <div class="glow-blue"></div>
+
+    <div class="hero-content">
+      <div class="badge">
+        <div class="badge-dot"></div>
+        Espacio de innovación juvenil
+      </div>
+
+      <h1>CLUB<br><span class="accent">HOUSE</span></h1>
+      <p class="hero-slogan">Donde la tecnología se encuentra con la innovación</p>
+      <p>Un espacio donde los jóvenes aprenden, crean y transforman el futuro a través de la tecnología.</p>
+
+      <div class="hero-btns">
+        <a href="pages/contact.html" class="btn-primary">Inscríbete ahora</a>
+        <a href="pages/programs.html" class="btn-outline">Ver programas</a>
+      </div>
+    </div>
+
+    <!-- Robot SVG -->
+    <div class="hero-robot">
+      <svg width="280" height="280" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="300" rx="32" fill="#4B2D8F"/>
+        <circle cx="150" cy="140" r="110" fill="#7EC8E3"/>
+        <ellipse cx="150" cy="155" rx="72" ry="68" fill="#FFFFFF"/>
+        <ellipse cx="150" cy="100" rx="56" ry="52" fill="#FFFFFF"/>
+        <rect x="108" y="88" width="84" height="40" rx="14" fill="#3D3D4E"/>
+        <path d="M128 115 Q128 104 140 104" stroke="#1A8FE3" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <path d="M172 115 Q172 104 160 104" stroke="#1A8FE3" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <text x="150" y="87" text-anchor="middle" font-family="Arial" font-weight="900" font-size="22" fill="#1A8FE3">H</text>
+        <line x1="104" y1="52" x2="104" y2="74" stroke="#3D3D4E" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="104" cy="48" r="8" fill="#3D3D4E"/>
+        <line x1="196" y1="52" x2="196" y2="74" stroke="#3D3D4E" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="196" cy="48" r="8" fill="#3D3D4E"/>
+        <rect x="139" y="133" width="22" height="28" rx="4" fill="#1A8FE3"/>
+        <path d="M122 158 Q150 178 178 158" stroke="#3D3D4E" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <circle cx="150" cy="140" r="113" stroke="#1A8FE3" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div><span class="stat-num">200+</span><span class="stat-label">Jóvenes formados</span></div>
+    <div><span class="stat-num">12</span><span class="stat-label">Programas activos</span></div>
+    <div><span class="stat-num">8</span><span class="stat-label">Expertos en equipo</span></div>
+    <div><span class="stat-num">3</span><span class="stat-label">Años de impacto</span></div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="section">
+      <span class="section-tag">// por qué elegirnos</span>
+      <h2 class="page-title">Un espacio para <span>crear</span></h2>
+      <div class="divider"></div>
+      <div class="grid-4">
+        <div class="card" data-animate>
+          <div class="feature-icon">💡</div>
+          <h3>Aprendizaje práctico</h3>
+          <p>Proyectos reales desde el primer día. Sin teoría aburrida.</p>
+        </div>
+        <div class="card" data-animate>
+          <div class="feature-icon">🤝</div>
+          <h3>Comunidad activa</h3>
+          <p>Conecta con otros jóvenes que comparten tu pasión por la tecnología.</p>
+        </div>
+        <div class="card" data-animate>
+          <div class="feature-icon">🚀</div>
+          <h3>Mentores expertos</h3>
+          <p>Aprende de profesionales con experiencia real en la industria tech.</p>
+        </div>
+        <div class="card" data-animate>
+          <div class="feature-icon">🏆</div>
+          <h3>Reconocimiento</h3>
+          <p>Certificados y participación en competencias de innovación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">CLUB <span>HOUSE</span></span>
+  <div class="footer-links">
+    <a href="index.html">Inicio</a>
+    <a href="pages/about.html">Nosotros</a>
+    <a href="pages/programs.html">Programas</a>
+    <a href="pages/gallery.html">Galería</a>
+    <a href="pages/team.html">Equipo</a>
+    <a href="pages/contact.html">Contacto</a>
+  </div>
+  <p>© 2026 Club House · Cali, Colombia</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
