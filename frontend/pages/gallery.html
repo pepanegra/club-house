@@ -154,7 +154,7 @@
 
       <!-- FOTOS -->
       <div id="tab-photos">
-        <div class="photos-grid">
+        <div class="photos-grid" id="photos-grid">
           <div class="photo-item wide">
             <div class="photo-placeholder">🖥️</div>
             <div class="photo-overlay"><span class="photo-label">Hackathon 2024</span></div>
@@ -185,7 +185,7 @@
 
       <!-- VIDEOS -->
       <div id="tab-videos" class="hidden">
-        <div class="videos-grid">
+        <div class="videos-grid" id="videos-grid">
           <div class="video-card">
             <div class="video-thumb">
               <div class="video-placeholder">🎬</div>
@@ -232,7 +232,7 @@
 
       <!-- LINKS / RECURSOS -->
       <div id="tab-links" class="hidden">
-        <div class="links-grid">
+        <div class="links-grid" id="links-grid">
           <a href="#" class="link-card">
             <div class="link-icon">📚</div>
             <div>
@@ -295,6 +295,7 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script src="../js/api.js"></script>
 <script>
 function switchTab(tab, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));

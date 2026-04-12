@@ -1,0 +1,10 @@
+# Nunca subas estos archivos a GitHub
+.env
+db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+media/
+staticfiles/
+.venv/
+venv/
