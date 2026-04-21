@@ -1,0 +1,28 @@
+# .dockerignore — Como .gitignore pero para Docker
+# Estos archivos NO se copian al contenedor
+
+# Entorno virtual — Docker instala sus propias dependencias
+venv/
+
+# Base de datos local — Docker usa PostgreSQL
+db.sqlite3
+
+# Variables de entorno — se pasan directo en docker-compose.yml
+.env
+
+# Archivos de Python compilados
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos estáticos generados
+staticfiles/
+
+# Git
+.git/
+.gitignore
+
+# Docker mismo
+Dockerfile
+docker-compose.yml
+.dockerignore

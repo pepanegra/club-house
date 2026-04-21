@@ -240,12 +240,12 @@
               <label>Programa de interés</label>
               <select id="programa">
                 <option value="">Selecciona un programa...</option>
-                <option>Programación Web</option>
-                <option>Robótica e IA</option>
-                <option>Diseño y Videojuegos</option>
-                <option>Desarrollo de Apps</option>
-                <option>Ciberseguridad</option>
-                <option>Ciencia de Datos</option>
+                <option>Programación</option>
+                <option>Robótica</option>
+                <option>Diseño 2D y 3D</option>
+                <option>Laboratorio tecnológico</option>
+                <option>Iniciación en tecnología</option>
+                <option>Tecnología saber pacífico</option>
                 <option>No sé, quiero asesoría</option>
               </select>
             </div>
@@ -340,17 +340,53 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script src="../js/api.js"></script>
 <script>
-function submitForm() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const email  = document.getElementById('email').value.trim();
+async function submitForm() {
+  const btn     = document.querySelector('.form-submit');
+  const nombre  = document.getElementById('nombre').value.trim();
+  const apellido= document.getElementById('apellido').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const telefono= document.getElementById('telefono').value.trim();
+  const edad    = document.getElementById('edad').value;
+  const programa= document.getElementById('programa').value;
+  const fuente  = document.getElementById('fuente').value;
+  const mensaje = document.getElementById('mensaje').value.trim();
+
+  // Validación básica
   if (!nombre || !email) {
-    alert('Por favor ingresa al menos tu nombre y correo.');
+    UI.toast('Por favor ingresa tu nombre y correo.', 'error');
     return;
   }
-  // Aquí se conectará con el backend Django
-  document.getElementById('form-content').style.display = 'none';
-  document.getElementById('success-msg').style.display  = 'block';
+  if (!email.includes('@')) {
+    UI.toast('El correo no parece válido.', 'error');
+    return;
+  }
+
+  // Poner botón en modo carga
+  UI.setLoading(btn, true);
+
+  try {
+    // Llamada real al backend Django
+    await API.usuarios.inscribir({
+      nombre, apellido, email, telefono,
+      edad, programa, fuente, mensaje
+    });
+
+    // Mostrar pantalla de éxito
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('success-msg').style.display  = 'block';
+    UI.toast('¡Inscripción enviada con éxito!', 'success');
+
+  } catch (error) {
+    // Manejar errores comunes
+    if (error.message.includes('email') || error.message.includes('already')) {
+      UI.toast('Ese correo ya está registrado.', 'error');
+    } else {
+      UI.toast(error.message || 'Ocurrió un error. Intenta de nuevo.', 'error');
+    }
+    UI.setLoading(btn, false);
+  }
 }
 
 function toggleFaq(el) {

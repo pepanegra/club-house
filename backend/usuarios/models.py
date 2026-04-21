@@ -32,13 +32,13 @@ class Usuario(models.Model):
     edad = models.CharField(max_length=10, choices=EDAD_CHOICES, blank=True)
 
     PROGRAMA_CHOICES = [
-        ('web',          'Programación Web'),
-        ('robotica',     'Robótica e IA'),
-        ('diseno',       'Diseño y Videojuegos'),
-        ('apps',         'Desarrollo de Apps'),
-        ('ciberseguridad','Ciberseguridad'),
-        ('datos',        'Ciencia de Datos'),
-        ('asesoria',     'Quiero asesoría'),
+        ('programacion',  'Programación'),
+        ('robotica',      'Robótica'),
+        ('iniciacion',    'Iniciación en tecnología'),
+        ('diseno',        'Diseño 2D y 3D'),
+        ('laboratorio',   'Laboratorio tecnológico'),
+        ('saber_pacifico','Tecnología saber pacífico'),
+        ('asesoria',      'Quiero asesoría'),
     ]
     programa = models.CharField(max_length=20, choices=PROGRAMA_CHOICES, blank=True, verbose_name='Programa de interés')
 

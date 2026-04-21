@@ -1,0 +1,58 @@
+# docker-compose.yml — Orquesta múltiples contenedores
+#
+# Docker Compose levanta varios servicios juntos con un solo comando.
+# Para el Club House tenemos 2 servicios:
+#   - db:      PostgreSQL (base de datos)
+#   - backend: Django (tu API)
+#
+# Comando para arrancar todo: docker compose up
+# Comando para detener todo:  docker compose down
+
+version: '3.9'
+
+services:
+
+  # ── BASE DE DATOS ────────────────────────────────────────────
+  db:
+    image: postgres:15          # Imagen oficial de PostgreSQL
+    restart: always             # Se reinicia si falla
+    environment:
+      POSTGRES_DB:       clubhouse_db
+      POSTGRES_USER:     clubhouse_user
+      POSTGRES_PASSWORD: clubhouse_pass
+    volumes:
+      # Persiste los datos aunque apagues los contenedores
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # ── BACKEND DJANGO ───────────────────────────────────────────
+  backend:
+    build: .                    # Construye usando el Dockerfile de esta carpeta
+    restart: always
+    ports:
+      - "8000:8000"             # Puerto local:puerto contenedor
+    environment:
+      # Estas variables reemplazan al .env cuando usas Docker
+      SECRET_KEY:    django-insecure-docker-dev-key-2026
+      DEBUG:         "True"
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      DATABASE_URL:  postgresql://clubhouse_user:clubhouse_pass@db:5432/clubhouse_db
+      CORS_ORIGINS:  http://localhost:5500,http://127.0.0.1:5500
+    volumes:
+      # Monta el código local en el contenedor (los cambios se ven al instante)
+      - .:/app
+      # Persiste los archivos subidos (fotos)
+      - media_data:/app/media
+    depends_on:
+      - db                      # Django espera a que PostgreSQL esté listo
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
+# ── VOLÚMENES ────────────────────────────────────────────────
+# Los volúmenes guardan datos fuera del contenedor
+# para que no se pierdan al apagar Docker
+volumes:
+  postgres_data:
+  media_data:
